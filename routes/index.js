@@ -10,7 +10,7 @@ router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
 router.use('/signin', signinRouter);
 router.use('/signup', signupRouter);
-router.use('*', (req, res, next) => {
+router.use('*', auth, (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const IncorrectRequestError = require('../errors/IncorrectRequestError');
-const OwnerError = require('../errors/IncorrectRequestError');
+const OwnerError = require('../errors/OwnerError');
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/NotFoundError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => res.status(200).send(movies))
     .catch(next);
 };
